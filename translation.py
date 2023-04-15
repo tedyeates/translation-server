@@ -1,4 +1,5 @@
 from flask import Flask, request, current_app
+from flask_cors import CORS
 
 import argostranslate.package
 import argostranslate.translate
@@ -14,12 +15,8 @@ def setup_translation_module():
     return argostranslate.translate
 
 app = Flask(__name__)
+cors = CORS(app)
 app.translate = setup_translation_module()
-
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
-
 
 @app.route("/translate", methods=["POST"])
 def translate():
@@ -36,6 +33,6 @@ def translate():
     
     translatedText = current_app.translate.translate(term, from_code, to_code)
     return {
-        "term": term,
+        "value": term,
         "translation": translatedText
     }
