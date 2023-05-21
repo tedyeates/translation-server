@@ -24,10 +24,10 @@ def translate():
     if not request.is_json:
         return "Content type is not supported", 415
     
-    term = data["term"]
-    if not term:
+    if "term" not in data:
         return "No term specified for translation", 400
     
+    term = data["term"]
     from_code = "en"
     to_code = "th"
     

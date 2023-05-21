@@ -1,0 +1,1 @@
+translation-env\Scripts\activate.bat && flask --app translation --debug run
